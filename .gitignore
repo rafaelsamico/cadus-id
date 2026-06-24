@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Scratch file for multi-line commit messages (git commit -F .gitmessage)
+.gitmessage
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
