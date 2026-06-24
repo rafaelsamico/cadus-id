@@ -9,11 +9,23 @@ export interface AnimatedButtonProps extends React.ComponentProps<typeof Button>
   icon: LucideIcon
 }
 
-const swap = {
-  initial: { opacity: 0, scale: 0.6 },
-  animate: { opacity: 1, scale: 1 },
-  exit: { opacity: 0, scale: 0.6 },
-  transition: { duration: 0.18, ease: "easeOut" },
+// Spring suave compartilhada por todo o movimento — dá o deslize orgânico.
+const spring = { type: "spring", stiffness: 320, damping: 30, mass: 0.7 } as const
+
+// Ícone normal (à esquerda): entra/sai deslizando pela esquerda.
+const iconSwap = {
+  initial: { opacity: 0, x: -8 },
+  animate: { opacity: 1, x: 0 },
+  exit: { opacity: 0, x: -8 },
+  transition: spring,
+} as const
+
+// ArrowUpRight (à direita): entra/sai deslizando pela direita.
+const arrowSwap = {
+  initial: { opacity: 0, x: 8 },
+  animate: { opacity: 1, x: 0 },
+  exit: { opacity: 0, x: 8 },
+  transition: spring,
 } as const
 
 /**
@@ -38,23 +50,30 @@ function AnimatedButton({
 
   const content = (label: React.ReactNode) => (
     <span className="inline-flex items-center gap-2">
-      <AnimatePresence mode="wait" initial={false}>
+      <AnimatePresence mode="popLayout" initial={false}>
         {hovered ? (
           <motion.span
             key="arrow"
             className="order-last inline-flex"
             aria-hidden
-            {...swap}
+            {...arrowSwap}
           >
             <ArrowUpRight />
           </motion.span>
         ) : (
-          <motion.span key="icon" className="inline-flex" aria-hidden {...swap}>
+          <motion.span
+            key="icon"
+            className="inline-flex"
+            aria-hidden
+            {...iconSwap}
+          >
             <Icon />
           </motion.span>
         )}
       </AnimatePresence>
-      <span className="order-2">{label}</span>
+      <motion.span layout className="order-2" transition={spring}>
+        {label}
+      </motion.span>
     </span>
   )
 
