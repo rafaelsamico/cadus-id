@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { AnimatedButton } from "@/components/motion/AnimatedButton"
 import { Marquee } from "@/components/motion/Marquee"
 import { PulsingDot } from "@/components/motion/PulsingDot"
+import { ScrambleText } from "@/components/motion/ScrambleText"
 
 export default function Hero() {
   return (
@@ -19,7 +20,7 @@ export default function Hero() {
 
         {/* Oneliner */}
         <Typography variant="display-xl" className="mb-4 max-w-4xl text-(--areia-800)">
-            Seu cuidado chega antes de você
+            <ScrambleText text="Seu cuidado chega antes de você" />
         </Typography>
 
         {/* Subtitle */}
