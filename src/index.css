@@ -70,7 +70,7 @@
   --urucum-900: oklch(0.265 0.09 21);
   --urucum-950: oklch(0.19 0.06 20);
 
-  --background: var(--areia-50);
+  --background: var(--areia-100);
   --foreground: var(--areia-950);
   --card: var(--areia-50);
   --card-foreground: var(--areia-950);
@@ -80,15 +80,15 @@
   --primary-foreground: var(--mata-50);
   --secondary: var(--barro-600);
   --secondary-foreground: var(--barro-50);
-  --muted: var(--areia-100);
+  --muted: var(--areia-200);
   --muted-foreground: var(--areia-600);
   --accent: var(--mata-100);
   --accent-foreground: var(--mata-800);
   --destructive: var(--urucum-600);
   --destructive-foreground: var(--urucum-50);
 
-  --border: var(--areia-200);
-  --input: var(--areia-200);
+  --border: var(--areia-300);
+  --input: var(--areia-300);
   --ring: var(--mata-500);
 
   --chart-1: var(--areia-950);
@@ -97,13 +97,13 @@
   --chart-4: var(--areia-400);
   --chart-5: var(--areia-200);
 
-  --sidebar: var(--areia-100);
+  --sidebar: var(--areia-200);
   --sidebar-foreground: var(--areia-900);
   --sidebar-primary: var(--mata-600);
   --sidebar-primary-foreground: var(--mata-50);
   --sidebar-accent: var(--mata-100);
   --sidebar-accent-foreground: var(--mata-800);
-  --sidebar-border: var(--areia-200);
+  --sidebar-border: var(--areia-300);
   --sidebar-ring: var(--mata-500);
 
   /* RADIUS */
