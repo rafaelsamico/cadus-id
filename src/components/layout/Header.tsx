@@ -16,11 +16,11 @@ export default function Header() {
         </Link>
 
         {/* CTAs */}
-        <div className="flex gap-3 w-72">
-          <AnimatedButton icon={User} variant={"default"} className="flex-1" asChild>
+        <div className="inline-grid grid-cols-2 gap-3">
+          <AnimatedButton icon={User} variant={"default"} className="w-full" asChild>
             <Link to="/pacientes">Sou paciente</Link>
           </AnimatedButton>
-          <AnimatedButton icon={Stethoscope} variant={"secondary"} className="flex-1" asChild>
+          <AnimatedButton icon={Stethoscope} variant={"secondary"} className="w-full" asChild>
             <Link to="/profissionais">Sou profissional</Link>
           </AnimatedButton>
         </div>
