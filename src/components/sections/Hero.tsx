@@ -1,17 +1,19 @@
+import { User, Stethoscope } from "lucide-react"
+
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { AnimatedButton } from "@/components/motion/AnimatedButton"
 import { Typography } from "@/components/ui/typography"
 import { Link } from "react-router-dom"
 
 export default function Hero() {
   return (
     <section 
-        className="flex flex-col items-center text-center px-6 py-24">
+        className="flex flex-col items-center text-center px-6 py-20">
 
         {/* Badges */}
         <div className="flex gap-3 mb-6 w-72">
-            <Badge className="flex-1 text-sm bg-(--mata-200) text-(--mata-800)">Para pacientes</Badge>
-            <Badge className="flex-1 text-sm bg-(--barro-200) text-(--barro-800)">Para profissionais</Badge>
+            <Badge className="flex-1 text-sm bg-(--mata-200) text-(--mata-800)">PACIENTES</Badge>
+            <Badge className="flex-1 text-sm bg-(--barro-200) text-(--barro-800)">PROFISSIONAIS</Badge>
         </div>
 
         {/* Oneliner */}
@@ -27,12 +29,12 @@ export default function Hero() {
 
         {/* CTAs */}
         <div className="flex gap-3 w-72">
-            <Button className="flex-1 font-bold bg-(--mata-600) text-(--mata-100) hover:bg-(--mata-800)" asChild>
+            <AnimatedButton icon={User} variant={"default"} className="flex-1" asChild>
                 <Link to="/pacientes">Sou paciente</Link>
-            </Button>
-            <Button className="flex-1 font-bold bg-(--barro-600) text-(--barro-100) hover:bg-(--barro-800)" asChild>
+            </AnimatedButton>
+            <AnimatedButton icon={Stethoscope} variant={"secondary"} className="flex-1" asChild>
                 <Link to="/profissionais">Sou profissional</Link>
-            </Button>
+            </AnimatedButton>
         </div>  
 
     </section>
