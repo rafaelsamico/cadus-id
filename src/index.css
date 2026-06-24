@@ -9,8 +9,8 @@
 
 :root {
   /* FONTS */
-  --font-archivo: "Archivo", sans-serif;
-  --font-public-sans: "Public Sans", sans-serif;
+  --font-archivo: "Archivo Variable", sans-serif;
+  --font-public-sans: "Public Sans Variable", sans-serif;
   --font-ibm-plex-mono: "IBM Plex Mono", monospace;
 
   --font-display: var(--font-archivo);
