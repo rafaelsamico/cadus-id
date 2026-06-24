@@ -2,6 +2,7 @@ import { User, Stethoscope } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { AnimatedButton } from "@/components/motion/AnimatedButton"
+import { Marquee } from "@/components/motion/Marquee"
 import { Typography } from "@/components/ui/typography"
 import { Link } from "react-router-dom"
 
@@ -27,6 +28,20 @@ export default function Hero() {
             menos espera na recepção, mais atenção para quem precisa
         </Typography>
 
+        {/* Clínicas em loop */}
+        <Marquee
+            className="mt-16 w-full max-w-3xl"
+            items={[
+                "Clínica Digital",
+                "Odontologia",
+                "Fonoaudiologia",
+                "Psicologia",
+                "Fisioterapia",
+                "Nutrição",
+                "Terapia Ocupacional",
+            ]}
+        />
+
         {/* CTAs */}
         <div className="flex gap-3 w-72">
             <AnimatedButton icon={User} variant={"default"} className="flex-1" asChild>
@@ -35,7 +50,7 @@ export default function Hero() {
             <AnimatedButton icon={Stethoscope} variant={"secondary"} className="flex-1" asChild>
                 <Link to="/profissionais">Sou profissional</Link>
             </AnimatedButton>
-        </div>  
+        </div>
 
     </section>
   )
