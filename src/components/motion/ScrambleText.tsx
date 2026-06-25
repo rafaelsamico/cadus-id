@@ -2,6 +2,10 @@ import * as React from "react"
 import { useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import {
+  CURTAIN_REVEAL_EVENT,
+  isCurtainBusy,
+} from "@/components/motion/PixelCurtain"
 
 /** Caracteres usados no embaralhamento quando nenhum é fornecido. */
 const DEFAULT_CHARS = "?!@#%&█▓▒░"
@@ -24,6 +28,8 @@ export interface ScrambleTextProps
   chars?: string
   /** Duração total da animação, em ms. */
   duration?: number
+  /** Dispara o scramble uma vez ao montar (ex.: na entrada da página). */
+  autoPlay?: boolean
 }
 
 /**
@@ -53,20 +59,24 @@ function ScrambleText({
   className,
   chars = DEFAULT_CHARS,
   duration = 800,
+  autoPlay = false,
   ...props
 }: ScrambleTextProps) {
   const reduced = useReducedMotion()
   const [display, setDisplay] = React.useState<string[]>(() => [...text])
 
-  // Agrupa os índices das letras por palavra (espaços viram quebras possíveis).
-  // Os espaços nunca embaralham, então suas posições são estáveis e podem ser
-  // derivadas só do texto.
+  // Agrupa os índices das letras por palavra (espaços viram quebras possíveis,
+  // "\n" vira quebra de linha forçada). Espaços/quebras nunca embaralham, então
+  // suas posições são estáveis e podem ser derivadas só do texto.
   const segments = React.useMemo(() => {
-    const result: ({ word: number[] } | { space: true })[] = []
+    const result: ({ word: number[] } | { space: true } | { br: true })[] = []
     let current: number[] | null = null
 
     Array.from(text).forEach((char, i) => {
-      if (char.trim() === "") {
+      if (char === "\n") {
+        current = null
+        result.push({ br: true })
+      } else if (char.trim() === "") {
         current = null
         result.push({ space: true })
       } else {
@@ -144,6 +154,22 @@ function ScrambleText({
     })
   }, [reduced, stop, text, chars, duration])
 
+  // autoPlay: dispara uma vez na entrada da página. Se uma cortina de pixels
+  // estiver cobrindo a tela, espera ela começar a revelar para iniciar — assim
+  // o efeito acontece quando a tela reaparece, não escondido atrás da cortina.
+  // Sem cortina (carga direta), dispara imediatamente.
+  React.useEffect(() => {
+    if (!autoPlay) return
+
+    if (!isCurtainBusy()) {
+      scramble()
+      return
+    }
+
+    window.addEventListener(CURTAIN_REVEAL_EVENT, scramble, { once: true })
+    return () => window.removeEventListener(CURTAIN_REVEAL_EVENT, scramble)
+  }, [autoPlay, scramble])
+
   return (
     <span
       className={cn("cursor-pointer", className)}
@@ -152,7 +178,9 @@ function ScrambleText({
       {...props}
     >
       {segments.map((seg, si) =>
-        "space" in seg ? (
+        "br" in seg ? (
+          <br key={si} />
+        ) : "space" in seg ? (
           <React.Fragment key={si}> </React.Fragment>
         ) : (
           // Palavra indivisível: inline-block impede a quebra no meio dela.

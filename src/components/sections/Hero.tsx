@@ -1,4 +1,4 @@
-import { User, Stethoscope } from "lucide-react"
+import { Heart, Stethoscope } from "lucide-react"
 
 import { Link } from "react-router-dom"
 import { Typography } from "@/components/ui/typography"
@@ -20,7 +20,7 @@ export default function Hero() {
 
         {/* Oneliner */}
         <Typography variant="display-xl" className="mb-4 max-w-4xl text-(--areia-800)">
-            <ScrambleText text="Seu cuidado chega antes de você" />
+            <ScrambleText text="Seu cuidado chega antes de você" autoPlay />
         </Typography>
 
         {/* Subtitle */}
@@ -45,7 +45,7 @@ export default function Hero() {
 
         {/* CTAs */}
         <div className="inline-grid grid-cols-2 gap-3">
-            <AnimatedButton icon={User} variant={"default"} className="w-full" asChild>
+            <AnimatedButton icon={Heart} variant={"default"} className="w-full" asChild>
                 <Link to="/pacientes">Sou paciente</Link>
             </AnimatedButton>
             <AnimatedButton icon={Stethoscope} variant={"secondary"} className="w-full" asChild>
