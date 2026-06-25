@@ -80,7 +80,9 @@ function AnimatedButton({
   // asChild: o filho (ex.: <Link>) é clonado para receber os handlers de hover
   // e ter seu conteúdo envolvido pela estrutura animada, preservando a navegação.
   if (asChild && React.isValidElement(children)) {
-    const child = children as React.ReactElement<{ children?: React.ReactNode }>
+    const child = children as React.ReactElement<
+      { children?: React.ReactNode } & React.DOMAttributes<HTMLElement>
+    >
 
     return (
       <Button asChild {...props}>
